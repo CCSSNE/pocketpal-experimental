@@ -209,17 +209,11 @@ const prepareCompletion = async ({
   }
 
   // 🔍 DIAGNOSTIC: Check if getFormattedChat properly renders thinking tokens
-  // Compare what getFormattedChat produces vs what completion() will do internally
+  // 0.11.0 getFormattedChat only accepts (messages) — no extra args
   if (context?.getFormattedChat && cleanCompletionParams.enable_thinking) {
     try {
-      const diagResult = await (context as any).getFormattedChat(
+      const diagResult = await context.getFormattedChat(
         (cleanCompletionParams as any).messages,
-        (cleanCompletionParams as any).chatTemplate || null,
-        {
-          jinja: true,
-          enable_thinking: cleanCompletionParams.enable_thinking,
-          reasoning_format: cleanCompletionParams.reasoning_format,
-        },
       );
       const diagPrompt =
         typeof diagResult === 'string'

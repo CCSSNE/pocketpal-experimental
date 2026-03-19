@@ -183,16 +183,8 @@ export async function applyChatTemplate(
   try {
     if (effectiveInterpreter === 'jinja') {
       if (context?.getFormattedChat) {
-        const customTemplate = modelChatTemplate?.chatTemplate?.trim() || null;
-        formattedChat = await (context as any).getFormattedChat(
-          messages,
-          customTemplate,
-          {
-            jinja: true,
-            enable_thinking: enableThinking,
-            reasoning_format: reasoningFormat,
-          },
-        );
+        // 0.11.0 getFormattedChat only accepts (messages) — no extra args
+        formattedChat = await context.getFormattedChat(messages);
       }
     } else if (modelChatTemplate?.chatTemplate?.trim()) {
       formattedChat = applyTemplate(toTextOnlyMessages(messages) as any, {
@@ -206,11 +198,8 @@ export async function applyChatTemplate(
       effectiveInterpreter === 'jinja' &&
       contextChatTemplate
     ) {
-      formattedChat = await (context as any)?.getFormattedChat(messages, null, {
-        jinja: true,
-        enable_thinking: enableThinking,
-        reasoning_format: reasoningFormat,
-      });
+      // 0.11.0 getFormattedChat only accepts (messages)
+      formattedChat = await context?.getFormattedChat(messages);
     }
 
     if (!formattedChat) {
