@@ -168,8 +168,8 @@ export async function applyChatTemplate(
   messages: ChatMessage[],
   model: Model | null,
   context: LlamaContext | null,
-  enableThinking: boolean = false,
-  reasoningFormat?: 'none' | 'auto' | 'deepseek',
+  _enableThinking: boolean = false,
+  _reasoningFormat?: 'none' | 'auto' | 'deepseek',
 ): Promise<string | JinjaFormattedChatResult> {
   const modelChatTemplate = model?.chatTemplate;
   const effectiveInterpreter =

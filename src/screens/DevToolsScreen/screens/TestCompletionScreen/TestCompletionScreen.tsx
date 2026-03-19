@@ -322,9 +322,8 @@ export const TestCompletionScreen: React.FC = observer(() => {
       let formattedChat: string | JinjaFormattedChatResult;
 
       // 0.11.0 getFormattedChat only accepts (messages)
-      formattedChat = await modelStore.context.getFormattedChat(
-        SAMPLE_CHAT_MESSAGES,
-      );
+      formattedChat =
+        await modelStore.context.getFormattedChat(SAMPLE_CHAT_MESSAGES);
 
       // Store formatted chat details for display
       if (typeof formattedChat !== 'string') {
@@ -600,9 +599,8 @@ export const TestCompletionScreen: React.FC = observer(() => {
         console.log('testCase', testCase);
         try {
           // 0.11.0 getFormattedChat only accepts (messages)
-          const formattedChat = await modelStore.context.getFormattedChat(
-            SAMPLE_CHAT_MESSAGES,
-          );
+          const formattedChat =
+            await modelStore.context.getFormattedChat(SAMPLE_CHAT_MESSAGES);
 
           _results.push({
             name: testCase.name,
